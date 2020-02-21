@@ -1,0 +1,134 @@
+﻿body {
+    background: url(../images/background-blur-clean-531880.jpg) no-repeat;
+    background-size:cover;
+    background-position:center;
+    height: 100%;
+}
+/*h1{
+    color:red;
+}*/
+#pageTitle {
+    margin-top: -20px;
+    text-align: center;
+    color: dodgerblue;
+    text-shadow: 0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 15px #fff,
+        0 0 20px #0f0,
+        0 0 35px #0f0,
+        0 0 40px #0f0,
+        0 0 60px #0f0,
+        0 0 90px #0f0
+}
+
+.label-default {
+    background-color: lightgreen;
+}
+
+.btn-primary-outline {
+    background-color: transparent;
+    border-color: #ccc;
+    color: dodgerblue;
+    top: 6px;
+    border: none;
+    text-shadow: 0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 15px #fff,
+        0 0 20px #0f0,
+        0 0 35px #0f0,
+        0 0 40px #0f0,
+        0 0 60px #0f0,
+        0 0 90px #0f0
+}
+
+.btn-primary-outline:hover {
+    color: dodgerblue;
+    text-shadow: 0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 15px #fff,
+        0 0 20px #0f0,
+        0 0 35px #0f0,
+        0 0 40px #0f0,
+        0 0 60px #0f0,
+        0 0 90px #0f0
+}
+
+/*.btn-primary-outline:active {
+    color: white;
+    text-shadow: 0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 15px #fff,
+        0 0 20px #0f0,
+        0 0 35px #0f0,
+        0 0 40px #0f0,
+        0 0 60px #0f0,
+        0 0 90px #0f0
+}*/
+
+.btn-primary-outline:focus {
+    color: dodgerblue;
+    outline:0 !important;
+    border: none;
+    box-shadow: none;
+    text-shadow: 0 0 5px #fff,
+        0 0 10px #fff,
+        0 0 15px #fff,
+        0 0 20px #0f0,
+        0 0 35px #0f0,
+        0 0 40px #0f0,
+        0 0 60px #0f0,
+        0 0 90px #0f0
+}
+
+.container-fluid-sty {
+    background-color: rgba(241, 248, 199, 0.5);
+    border: 1px solid;
+    border-color: lightgray;
+    border-radius: 25px;
+}
+
+.fixed-panel {
+    min-height: 350px;
+    max-height: 350px;
+    overflow-y: scroll;
+    overflow-x: scroll;
+    text-wrap: normal;
+}
+
+/*#refreshButton {
+    position:absolute;
+    top: 15px;
+}*/
+
+h3 {
+    text-align: center;
+    color: dodgerblue;
+    font-size: 24px;
+    text-shadow: 0 0 5px #fff, 
+        0 0 10px #fff,
+        0 0 15px #fff,
+        0 0 20px #0f0,
+        0 0 35px #0f0,
+        0 0 40px #0f0,
+        0 0 60px #0f0,
+        0 0 90px #0f0
+}
+
+textarea {
+    resize: none;
+}
+
+.logged-in {
+    visibility:hidden;
+}
+
+.label-as-badge {
+    border-radius: 1em;
+    font-size:small;
+    float: right;
+}
+
+.userColor {
+    color:red;
+}
+

@@ -12,7 +12,6 @@ C:\Users\artur\Desktop\CODE\GitHub\WebSocket--Trabalho-Redes\WebSocket-CHAT\bin\
 C:\Users\artur\Desktop\CODE\GitHub\WebSocket--Trabalho-Redes\WebSocket-CHAT\obj\Debug\netcoreapp3.1\WebSocket-CHAT.csprojAssemblyReference.cache
 C:\Users\artur\Desktop\CODE\GitHub\WebSocket--Trabalho-Redes\WebSocket-CHAT\obj\Debug\netcoreapp3.1\staticwebassets\WebSocket-CHAT.StaticWebAssets.Manifest.cache
 C:\Users\artur\Desktop\CODE\GitHub\WebSocket--Trabalho-Redes\WebSocket-CHAT\obj\Debug\netcoreapp3.1\staticwebassets\WebSocket-CHAT.StaticWebAssets.xml
-C:\Users\artur\Desktop\CODE\GitHub\WebSocket--Trabalho-Redes\WebSocket-CHAT\obj\Debug\netcoreapp3.1\WebSocket-CHAT.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\artur\Desktop\CODE\GitHub\WebSocket--Trabalho-Redes\WebSocket-CHAT\obj\Debug\netcoreapp3.1\WebSocket-CHAT.RazorAssemblyInfo.cache
 C:\Users\artur\Desktop\CODE\GitHub\WebSocket--Trabalho-Redes\WebSocket-CHAT\obj\Debug\netcoreapp3.1\WebSocket-CHAT.RazorAssemblyInfo.cs
 C:\Users\artur\Desktop\CODE\GitHub\WebSocket--Trabalho-Redes\WebSocket-CHAT\obj\Debug\netcoreapp3.1\WebSocket-CHAT.AssemblyInfoInputs.cache
@@ -33,3 +32,5 @@ C:\Users\artur\Desktop\CODE\GitHub\WebSocket--Trabalho-Redes\WebSocket-CHAT\obj\
 C:\Users\artur\Desktop\CODE\GitHub\WebSocket--Trabalho-Redes\WebSocket-CHAT\obj\Debug\netcoreapp3.1\WebSocket-CHAT.dll
 C:\Users\artur\Desktop\CODE\GitHub\WebSocket--Trabalho-Redes\WebSocket-CHAT\obj\Debug\netcoreapp3.1\WebSocket-CHAT.pdb
 C:\Users\artur\Desktop\CODE\GitHub\WebSocket--Trabalho-Redes\WebSocket-CHAT\obj\Debug\netcoreapp3.1\WebSocket-CHAT.csproj.CopyComplete
+C:\Users\artur\Desktop\CODE\GitHub\WebSocket--Trabalho-Redes\WebSocket-CHAT\bin\Debug\netcoreapp3.1\libman.json
+C:\Users\artur\Desktop\CODE\GitHub\WebSocket--Trabalho-Redes\WebSocket-CHAT\obj\Debug\netcoreapp3.1\Razor\Pages\Shared\_CookieConsentPartial.cshtml.g.cs
