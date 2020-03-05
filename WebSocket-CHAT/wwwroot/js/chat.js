@@ -1,161 +1,127 @@
 ﻿"use strict";
 
-var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
+var connection = new signalR.HubConnectionBuilder().withUrl("/messages").build();
+var username = "Anonymous"; //utilizador default é Anonimo
 
-function checkTime(i) {
-    if (i < 10) {
-        i = '0' + i;
+function tempoMsg(tempo) {
+
+    function segundosFormata(i) { //serve pra formatar os segundos ;; 9 --> 09
+        if (i < 10)
+            return i = '0' + i;
     }
-    return i;
+
+    var data = new Date();
+    var horas = data.getHours();
+    var minutos = data.getMinutes();
+    var segundos = data.getSeconds();
+
+    minutos = segundosFormata(minutos);
+    segundos = segundosFormata(segundos);
+
+    return tempo = " " + horas + ":" + minutos + ":" + segundos + " ";
 }
 
-function dayOfWeek(dayIndex) {
-    return ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"][dayIndex];
-}
-function boldString(str, find) {
-    var re = new RegExp(find, 'g');
-    return str.replace(re, '<b>' + find + '</b>');
+function isEmptyOrSpaces(str) {
+    return str === null || str.match(/^ *$/) !== null;
 }
 
-connection.on("ReceiveMessage", function (user, message) {
+//registo do utilizador
+$("#sendUserName").click(function () {
+    //var username = "" + $('#usernameInput:text').val() + " entrou";
+    username = $('#usernameInput:text').val();
+
+    if (isEmptyOrSpaces(username))
+        username = "Anonymous";
+
+    $('#usernameSpan').html(username);
+
+    //dá-se o incio da conexão
+    connection.start().catch(function (err) {
+        return console.error(err.toString());
+    });
+
+    connection.invoke("NewUser", username).catch(function (err) {
+        return console.error(err.toString());
+    });
+
+    $connection.invoke("SendMessageToAll", username);
+
+});
+
+//envio de mensagens
+connection.on("ReceiveMessage", function (message) {
     var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-    var today = new Date();
-    var hours = today.getHours();
-    var minutes = today.getMinutes();
-    var seconds = today.getSeconds();
-    var day = dayOfWeek(today.getDay());
-    var date = today.getDate();
+    var div = document.createElement("div");
+    div.innerHTML = msg + "<hr/>";
+    document.getElementById("messages").appendChild(div);
+    div.scrollIntoView();
+});
 
-    minutes = checkTime(minutes);
-    seconds = checkTime(seconds);
+//utilizador conecta
+connection.on("UserConnected", function (connectionId) {
+    var option = document.createElement("option");
+    option.text = connectionId;
+    option.value = connectionId;
+    document.getElementById("group").add(option); //grupo de elementos
+    connection.invoke("SendMessageToAll", ("" + username + " ON"));
 
-    var time = " " + hours + ":" + minutes + ":" + seconds + " | " + day + " " + date + " ";
-    if (user.toString() === '') {
-        user = 'Anonymous';
+    //adiciona User nos User ON
+    var userTag = document.createElement("li");
+    userTag.textContent = username;
+    document.getElementById("userList").appendChild(userTag);
+});
+
+//utilizador desconecta
+connection.on("UserDisconnected", function (connectionId) {
+    var groupElement = document.getElementById("group");
+    for (var i = 0; i < groupElement.length; i++) {
+        if (groupElement.options[i].value == connectionId)
+            groupElement.remove(i);
+    }
+    connection.invoke("SendMessageToAll", ("" + username + " OFF"));
+
+    //remove User nos User ON
+    var userTag = document.createElement("li");
+    userTag.textContent = username;
+    document.getElementById("userList").appendChild(userTag+"off");
+});
+
+//codigo alteracao DOM
+$("#sendButton").click(function () {
+    var message = document.getElementById("message").value;
+    var groupElement = document.getElementById("group");
+    var groupValue = groupElement.options[groupElement.selectedIndex].value;
+    var method = "SendMessageToAll";
+
+    if (groupValue === "All") {
+        var method = groupValue === "All" ? "SendMessageToAll" : "SendMessageToCaller";
+        connection.invoke(method, username + " (" + tempoMsg() + ")-- > " + message).catch(function (err) {
+            return console.error(err.toString());
+        });
+    } else if (groupValue === "PrivateGroup") {
+        connection.invoke("SendMessageToGroup", "PrivateGroup", message).catch(function (err) {
+            return console.error(err.toString());
+        });
+    } else {
+        connection.invoke("SendMessageToUser", groupValue, message).catch(function (err) {
+            return console.error(err.toString());
+        });
     }
 
-    var encodedMsg = user + ": " + msg;
-
-    var li = document.createElement("li");
-    li.setAttribute("id", "onlineMessages");
-    li.className = "list-group-item list-group-item-info";
-
-    var span = document.createElement("span");
-    span.className = "label label-primary label-as-badge";
-    span.textContent = time;
-    span.style.cssFloat = "right";   
-
-    
-    li.textContent = encodedMsg;
-
-    var colorValue = document.getElementById("valueInputColor").value;
-    li.style.color = colorValue;
-    document.getElementById("messagesList").appendChild(li);
-    document.getElementById("onlineMessages").appendChild(span);
-    document.getElementById("onlineMessages").innerHTML = boldString(document.getElementById("onlineMessages").innerHTML, user);
-    li.setAttribute("id", "temp");
-    li.scrollIntoView();
-});
-connection.on("NewUser", function (user) {
-    var li = document.createElement("li");
-    li.setAttribute("id", "onlineUsers");
-    li.className = "list-group-item";
-    li.textContent = user;
-    
-    var span = document.createElement("span");
-    span.className = "label label-success label-as-badge";
-    span.textContent = "✔";
-    span.style.cssFloat = "right";   
-
-    
-    document.getElementById("usersList").appendChild(li);
-    document.getElementById("onlineUsers").appendChild(span);
-    li.setAttribute("id", "temp");
-    li.scrollIntoView();
+    e.preventDefault();
 });
 
-window.addEventListener("beforeunload", function (user) {
-    var user = document.getElementById("userInput").value;
-    //var message = document.getElementById("messageInput").value;
-    connection.invoke("UserLeft", user).catch(function (err) {
+$("#joinGroup").click(function (event) {
+
+    var nomeGrupo = $('#nomeGrupo:text').val();
+
+    var option = document.createElement("option");
+    option.text = nomeGrupo;
+    option.value = nomeGrupo;
+    document.getElementById("group").add(option); //grupo de elementos
+
+    connection.invoke("JoinGroup", nomeGrupo).catch(function (err) {
         return console.error(err.toString());
     });
-    event.preventDefault();
-});
-
-connection.start().catch(function (err) {
-    return console.error(err.toString());
-});
-
-document.getElementById("urlButton").addEventListener("click", function (event) {
-    var clipboard = document.createElement('input'), textUrl = window.location.href;
-    document.body.appendChild(clipboard);
-    clipboard.value = textUrl;
-    clipboard.select();
-    document.execCommand('copy');
-    document.body.removeChild(clipboard);
-    event.preventDefault();
-});
-
-document.getElementById("sendButton").addEventListener("click", function (event) {
-    var user = document.getElementById("userInput").value;
-    var message = document.getElementById("messageInput").value;
-    connection.invoke("SendMessage", user, message).catch(function (err) {
-        return console.error(err.toString());
-    });
-    event.preventDefault();
-});
-
-$(document).ready(function () {
-    $('[data-toggle="tooltip"]').tooltip();
-    $('#newUserButton').prop('disabled', true);
-    $('#userInput').on('keyup', (function () {
-        if ($(this).val() != '') {
-            $('#newUserButton').prop('disabled', false);
-        }
-        else {
-            $('#newUserButton').prop('disabled', true);
-        }
-    }));
-});
-
-document.getElementById("newUserButton").addEventListener("click", function (event) {
-    var user = document.getElementById("userInput").value;
-    connection.invoke("NewUser", user).catch(function (err) {
-        return console.error(err.toString());
-    });
-
-    document.getElementById("userInput").readOnly = true;
-
-    var button = document.getElementById("newUserButton");
-    var icon = document.getElementById("buttonIcon");
-    icon.setAttribute("class", "glyphicon glyphicon-user cursor:default");
-    button.style.cursor = "auto";
-    //$("#nameFooter").hide();
-    button.disabled = "disabled";
-    setTimeout(function () {        
-        document.getElementById("refreshButton").click();
-    }, 100);
-
-    event.preventDefault();
-});
-
-document.getElementById("refreshButton").addEventListener("click", function (event) {
-    $(document.getElementById("usersList")).empty();
-    connection.invoke("GetUsers").catch(function (err) {
-        return console.error(err.toString());
-    });
-    event.preventDefault();
-});
-
-
-
-document.getElementById("clearMessageButton").addEventListener("click", function (event) {
-    document.getElementById("messageInput").value = '';
-    event.preventDefault();
-});
-
-document.getElementById("clearChatButton").addEventListener("click", function (event) {
-    $(document.getElementById("messagesList")).empty();
     event.preventDefault();
 });

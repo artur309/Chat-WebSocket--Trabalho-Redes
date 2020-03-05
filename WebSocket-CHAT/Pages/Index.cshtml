@@ -3,95 +3,81 @@
 <link rel="stylesheet" type="text/css" href="~/css/style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<h1 id="pageTitle">Aplicação de Chat</h1>
-<div class="container-fluid-sty">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-3">
-                <div class="input-group col-sm-12">
-                    @*<div class="row">&nbsp;</div>*@
-                    <h3><span class="control-label">Users online</span></h3>
-                    <div class="input-group-btn">
-                        <button class="btn btn-primary-outline" id="refreshButton" data-toggle="tooltip" data-placement="top" title="Refresh">
-                            <i class="fa fa-refresh fa-spin" style="font-size:24px"></i>
-                        </button>
-                    </div>
+<h1 class="titulo">WebChat Signlar</h1>
+
+<!-- users-->
+<div class="users col-sm-3">
+
+    <div class="input-group col-sm-12">
+        <h3><span>Utilizadores Online</span></h3>
+        <div class="input-group-btn">
+            <button class="btn btn-primary-outline" id="refreshButton" data-toggle="tooltip" data-placement="top" title="Atualizar">
+                <i class="fa fa-refresh fa-spin" style="font-size:24px"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+
+        <div class="panel-body fixed-panel">
+            <ul class="list-group" id="usersList"></ul>
+            Nome: <span id='usernameSpan'>__</span>
+        </div>
+
+        <div id="userList"></div>
+
+        <div class="panel-footer" id="nameFooter">
+            <div class="input-group col-sm-12">
+
+                <input id="usernameInput" type="text" class="form-control" placeholder="Username..." maxlength="16">
+
+                <div class="input-group-btn">
+                    <button class="btn btn-success" id="sendUserName">Username</button>
                 </div>
 
-                @*<h3><input type="text" readonly="readonly" value="Users online" class="form-control" style="text-align:center; font-size:large; background-color:white" /></h3>*@
-                <br />
-                <div class="panel panel-default">
-                    <div class="panel-body fixed-panel">
-                        <ul class="list-group" id="usersList"></ul>
-                        @*<div class="col-sm-2 col-sm-offset-1">
-                            </div>*@
-                    </div>
-                    <div class="panel-footer" id="nameFooter">
-                        <div class="input-group col-sm-12">
-                            <div class="input-group-btn">
-                                <button class="btn btn-default jscolor {valueElement:'valueInputColor', value:'#337ab7', hash:true, uppercase:false, closable:true, closeText: 'Close'}" id="colorButton" data-toggle="tooltip" data-placement="bottom" title="Message color">
-                                    🎨
-                                </button>
-                                @*<button class="btn btn-default" id="nickColorPicker">
-                                    </button>*@
-                            </div>
-                            <input id="userInput" type="text" class="form-control" placeholder="Nickname..." maxlength="16">
-                            <div class="input-group-btn">
-                                <button class="btn btn-success" id="newUserButton">
-                                    <span class="glyphicon glyphicon-log-in" id="buttonIcon" data-toggle="tooltip" data-placement="right" title="Login"></span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
-            <div class="col-sm-9">
-                <div class="row">&nbsp;</div>
-                <div class="input-group col-sm-6 col-sm-offset-3">
-                    <div class="input-group-btn">
-                        <button class="btn btn-danger" id="clearChatButton" data-toggle="tooltip" data-placement="bottom" title="Clear chat">
-                            <span class="glyphicon glyphicon-trash"></span>
-                        </button>
-                    </div>
-                    <input type="text" readonly="readonly" value="Messages" class="form-control" style="text-align:center; font-size:large; background-color:white" />
-                    <div class="input-group-btn">
-                        <button class="btn btn-primary" id="urlButton" data-toggle="tooltip" data-placement="right" title="Copy link">
-                            <span class="glyphicon glyphicon-copy"></span>
-                        </button>
-                    </div>
+        </div>
+
+    </div>
+</div>
+
+<!--chat-->
+<div class="chat col-sm-9">
+
+    <div class="grupos">
+        <input type="text" id="nomeGrupo" value="" />
+        <input type="button" id="joinGroup" value="Join Private Group" />
+    </div>
+
+    <br />
+    <br />
+    <br />
+
+    <!-- ChatArea -->
+
+    <div class="panel panel-default">
+
+        <div class="panel-body fixed-panel chat">
+            <ul class="list-group" id="messages"></ul>
+        </div>
+
+        <div class="panel-footer">
+            <div class="input-group col-sm-12">
+
+                <select id="group">
+                    <option value="All">Everyone</option>
+                    <option value="privategroup">private group</option>
+                </select>
+
+                <textarea id="message" name="message" class="form-control" placeholder="Mensagem" rows="1"></textarea>
+                <div class="input-group-btn">
+                    <input class="buttonSend" type="button" id="sendButton" value="Enviar" />
                 </div>
-                <br />
-                <div class="panel panel-default">
-                    <div class="panel-body fixed-panel">
-                        <div class="row">&nbsp;</div>
-                        <br />
-                        <ul class="list-group" id="messagesList"></ul>
-                        @*<ul class="list-group-item-info li" id="messagesList"></ul>*@
-                    </div>
-                    <div class="panel-footer">
-                        <div class="input-group col-sm-12">
-                            <div class="input-group-btn">
-                                <button class="btn btn-primary" id="clearMessageButton" data-toggle="tooltip" data-placement="left" title="Erase">
-                                    <span class="glyphicon glyphicon-erase"></span>
-                                </button>
-                            </div>
-                            <textarea id="messageInput" class="form-control" placeholder="Message..." rows="1"></textarea>
-                            <div class="input-group-btn">
-                                <button class="btn btn-primary" id="sendButton" data-toggle="tooltip" data-placement="right" title="Send">
-                                    <span class="glyphicon glyphicon-send"></span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
 </div>
-
-<p id="colorPicker" style="display:none">
-    Value: <input id="valueInputColor" value="#F69420"><br>
-</p>
 
 <script src="~/js/jquery-3.3.1.js"></script>
 <script src="~/lib/aspnet/signalr/dist/browser/signalr.js"></script>

@@ -14,7 +14,8 @@
         "outputPath": "C:\\Users\\artur\\Desktop\\CODE\\GitHub\\WebSocket--Trabalho-Redes\\WebSocket-CHAT\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\"
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
           "C:\\Users\\artur\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -47,6 +48,10 @@
               "version": "[2.1.1, )"
             },
             "Microsoft.NETCore.App": {
+              "target": "Package",
+              "version": "[2.1.10, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[2.1.10, )"
             }
