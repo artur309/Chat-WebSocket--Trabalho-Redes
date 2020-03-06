@@ -47,6 +47,10 @@
               "target": "Package",
               "version": "[2.1.1, )"
             },
+            "Microsoft.AspNetCore.SignalR": {
+              "target": "Package",
+              "version": "[1.0.3, )"
+            },
             "Microsoft.NETCore.App": {
               "target": "Package",
               "version": "[2.1.10, )"
@@ -54,6 +58,18 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[2.1.10, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            },
+            "System.Runtime.Serialization.Json": {
+              "target": "Package",
+              "version": "[4.3.0, )"
+            },
+            "System.Text.Json": {
+              "target": "Package",
+              "version": "[4.7.1, )"
             }
           },
           "imports": [

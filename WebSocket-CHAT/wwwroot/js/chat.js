@@ -1,24 +1,11 @@
 ﻿"use strict";
 
 var connection = new signalR.HubConnectionBuilder().withUrl("/messages").build();
-var username = "Anonymous"; //utilizador default é Anonimo
+var username;
 
-function tempoMsg(tempo) {
-
-    function segundosFormata(i) { //serve pra formatar os segundos ;; 9 --> 09
-        if (i < 10)
-            return i = '0' + i;
-    }
-
+function tempoMsg() {
     var data = new Date();
-    var horas = data.getHours();
-    var minutos = data.getMinutes();
-    var segundos = data.getSeconds();
-
-    minutos = segundosFormata(minutos);
-    segundos = segundosFormata(segundos);
-
-    return tempo = " " + horas + ":" + minutos + ":" + segundos + " ";
+    return " " + data.getHours() + ":" + data.getMinutes() + ":" + data.getSeconds() + " ";
 }
 
 function isEmptyOrSpaces(str) {
@@ -27,7 +14,6 @@ function isEmptyOrSpaces(str) {
 
 //registo do utilizador
 $("#sendUserName").click(function () {
-    //var username = "" + $('#usernameInput:text').val() + " entrou";
     username = $('#usernameInput:text').val();
 
     if (isEmptyOrSpaces(username))
@@ -40,15 +26,17 @@ $("#sendUserName").click(function () {
         return console.error(err.toString());
     });
 
+    //inserção do novo user
     connection.invoke("NewUser", username).catch(function (err) {
         return console.error(err.toString());
     });
 
+    //avisa a todos os user que um novo user entrou
     $connection.invoke("SendMessageToAll", username);
 
 });
 
-//envio de mensagens
+//receber mensagens
 connection.on("ReceiveMessage", function (message) {
     var msg = message.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
     var div = document.createElement("div");
@@ -59,10 +47,7 @@ connection.on("ReceiveMessage", function (message) {
 
 //utilizador conecta
 connection.on("UserConnected", function (connectionId) {
-    var option = document.createElement("option");
-    option.text = connectionId;
-    option.value = connectionId;
-    document.getElementById("group").add(option); //grupo de elementos
+
     connection.invoke("SendMessageToAll", ("" + username + " ON"));
 
     //adiciona User nos User ON
@@ -73,41 +58,35 @@ connection.on("UserConnected", function (connectionId) {
 
 //utilizador desconecta
 connection.on("UserDisconnected", function (connectionId) {
-    var groupElement = document.getElementById("group");
-    for (var i = 0; i < groupElement.length; i++) {
-        if (groupElement.options[i].value == connectionId)
-            groupElement.remove(i);
-    }
+
     connection.invoke("SendMessageToAll", ("" + username + " OFF"));
 
     //remove User nos User ON
     var userTag = document.createElement("li");
     userTag.textContent = username;
-    document.getElementById("userList").appendChild(userTag+"off");
+    document.getElementById("userList").appendChild(userTag + "off");
 });
 
 //codigo alteracao DOM
 $("#sendButton").click(function () {
-    var message = document.getElementById("message").value;
+    var message = $('#message').val();
+
+    if(isEmptyOrSpaces(message))
+        message = "----";
+
     var groupElement = document.getElementById("group");
     var groupValue = groupElement.options[groupElement.selectedIndex].value;
-    var method = "SendMessageToAll";
 
     if (groupValue === "All") {
-        var method = groupValue === "All" ? "SendMessageToAll" : "SendMessageToCaller";
-        connection.invoke(method, username + " (" + tempoMsg() + ")-- > " + message).catch(function (err) {
-            return console.error(err.toString());
-        });
-    } else if (groupValue === "PrivateGroup") {
-        connection.invoke("SendMessageToGroup", "PrivateGroup", message).catch(function (err) {
-            return console.error(err.toString());
-        });
-    } else {
-        connection.invoke("SendMessageToUser", groupValue, message).catch(function (err) {
+        connection.invoke("SendMessageToAll", username + " (" + tempoMsg() + ")-- > " + message).catch(function (err) {
             return console.error(err.toString());
         });
     }
-
+    else {
+        connection.invoke("SendMessageToGroup", groupValue, " (" + tempoMsg() + ")-- > " + message).catch(function (err) {
+            return console.error(err.toString());
+        });
+    }
     e.preventDefault();
 });
 

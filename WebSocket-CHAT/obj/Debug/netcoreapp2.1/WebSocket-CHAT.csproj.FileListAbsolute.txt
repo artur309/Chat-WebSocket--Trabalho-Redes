@@ -17,9 +17,7 @@ C:\Users\artur\Desktop\CODE\GitHub\WebSocket--Trabalho-Redes\WebSocket-CHAT\obj\
 C:\Users\artur\Desktop\CODE\GitHub\WebSocket--Trabalho-Redes\WebSocket-CHAT\obj\Debug\netcoreapp2.1\WebSocket-CHAT.TagHelpers.input.cache
 C:\Users\artur\Desktop\CODE\GitHub\WebSocket--Trabalho-Redes\WebSocket-CHAT\obj\Debug\netcoreapp2.1\WebSocket-CHAT.TagHelpers.output.cache
 C:\Users\artur\Desktop\CODE\GitHub\WebSocket--Trabalho-Redes\WebSocket-CHAT\obj\Debug\netcoreapp2.1\WebSocket-CHAT.RazorCoreGenerate.cache
-C:\Users\artur\Desktop\CODE\GitHub\WebSocket--Trabalho-Redes\WebSocket-CHAT\obj\Debug\netcoreapp2.1\Razor\Pages\Error.cshtml.g.cs
 C:\Users\artur\Desktop\CODE\GitHub\WebSocket--Trabalho-Redes\WebSocket-CHAT\obj\Debug\netcoreapp2.1\Razor\Pages\Index.cshtml.g.cs
-C:\Users\artur\Desktop\CODE\GitHub\WebSocket--Trabalho-Redes\WebSocket-CHAT\obj\Debug\netcoreapp2.1\Razor\Pages\Shared\_CookieConsentPartial.cshtml.g.cs
 C:\Users\artur\Desktop\CODE\GitHub\WebSocket--Trabalho-Redes\WebSocket-CHAT\obj\Debug\netcoreapp2.1\Razor\Pages\Shared\_Layout.cshtml.g.cs
 C:\Users\artur\Desktop\CODE\GitHub\WebSocket--Trabalho-Redes\WebSocket-CHAT\obj\Debug\netcoreapp2.1\Razor\Pages\Shared\_ValidationScriptsPartial.cshtml.g.cs
 C:\Users\artur\Desktop\CODE\GitHub\WebSocket--Trabalho-Redes\WebSocket-CHAT\obj\Debug\netcoreapp2.1\Razor\Pages\_ViewImports.cshtml.g.cs
@@ -30,3 +28,4 @@ C:\Users\artur\Desktop\CODE\GitHub\WebSocket--Trabalho-Redes\WebSocket-CHAT\obj\
 C:\Users\artur\Desktop\CODE\GitHub\WebSocket--Trabalho-Redes\WebSocket-CHAT\obj\Debug\netcoreapp2.1\WebSocket-CHAT.dll
 C:\Users\artur\Desktop\CODE\GitHub\WebSocket--Trabalho-Redes\WebSocket-CHAT\obj\Debug\netcoreapp2.1\WebSocket-CHAT.pdb
 C:\Users\artur\Desktop\CODE\GitHub\WebSocket--Trabalho-Redes\WebSocket-CHAT\obj\Debug\netcoreapp2.1\WebSocket-CHAT.csproj.CopyComplete
+C:\Users\artur\Desktop\CODE\GitHub\WebSocket--Trabalho-Redes\WebSocket-CHAT\obj\Debug\netcoreapp2.1\Razor\Pages\Shared\_CookieConsentPartial.cshtml.g.cs

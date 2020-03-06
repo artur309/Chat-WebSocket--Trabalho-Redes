@@ -1,7 +1,7 @@
 ﻿@page
 
 <link rel="stylesheet" type="text/css" href="~/css/style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link href="~/css/font-awesome.min.css" rel="stylesheet" />
 
 <h1 class="titulo">WebChat Signlar</h1>
 
@@ -10,21 +10,16 @@
 
     <div class="input-group col-sm-12">
         <h3><span>Utilizadores Online</span></h3>
-        <div class="input-group-btn">
-            <button class="btn btn-primary-outline" id="refreshButton" data-toggle="tooltip" data-placement="top" title="Atualizar">
-                <i class="fa fa-refresh fa-spin" style="font-size:24px"></i>
-            </button>
-        </div>
     </div>
 
     <div class="panel panel-default">
 
         <div class="panel-body fixed-panel">
             <ul class="list-group" id="usersList"></ul>
-            Nome: <span id='usernameSpan'>__</span>
+            <div id="userList"></div>
         </div>
 
-        <div id="userList"></div>
+        Nome: <span id='usernameSpan'>__</span>
 
         <div class="panel-footer" id="nameFooter">
             <div class="input-group col-sm-12">
@@ -66,7 +61,6 @@
 
                 <select id="group">
                     <option value="All">Everyone</option>
-                    <option value="privategroup">private group</option>
                 </select>
 
                 <textarea id="message" name="message" class="form-control" placeholder="Mensagem" rows="1"></textarea>

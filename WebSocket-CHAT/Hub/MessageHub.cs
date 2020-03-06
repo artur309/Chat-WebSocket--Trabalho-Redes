@@ -9,8 +9,7 @@ namespace WebSocket_CHAT
     public class MessageHub : Hub
     {
         public static List<string> Utilizadores { get; set; } = new List<string>();
-        public static List<string> Chat { get; set; } = new List<string>();
-
+        
         public async Task NewUser(string user)
         {
             foreach (var elem in Utilizadores)
@@ -33,11 +32,6 @@ namespace WebSocket_CHAT
         public Task SendMessageToCaller(string message)
         {
             return Clients.Caller.SendAsync("ReceiveMessage", message);
-        }
-
-        public Task SendMessageToUser(string connectionId, string message)
-        {
-            return Clients.Client(connectionId).SendAsync("ReceiveMessage", message);
         }
 
         public Task JoinGroup(string group)
