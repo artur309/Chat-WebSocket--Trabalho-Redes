@@ -22,14 +22,10 @@ $("#sendUserName").click(function () {
     $('#usernameSpan').html(username);
 
     //dá-se o incio da conexão
-    connection.start().catch(function (err) {
-        return console.error(err.toString());
-    });
+    connection.start();
 
     //inserção do novo user
-    connection.invoke("NewUser", username).catch(function (err) {
-        return console.error(err.toString());
-    });
+    connection.invoke("NewUser", username);
 
     //avisa a todos os user que um novo user entrou
     $connection.invoke("SendMessageToAll", username);
@@ -77,20 +73,15 @@ $("#sendButton").click(function () {
     var groupElement = document.getElementById("group");
     var groupValue = groupElement.options[groupElement.selectedIndex].value;
 
-    if (groupValue === "All") {
-        connection.invoke("SendMessageToAll", username + " (" + tempoMsg() + ")-- > " + message).catch(function (err) {
-            return console.error(err.toString());
-        });
-    }
-    else {
-        connection.invoke("SendMessageToGroup", groupValue, " (" + tempoMsg() + ")-- > " + message).catch(function (err) {
-            return console.error(err.toString());
-        });
-    }
+    if (groupValue === "All")
+        connection.invoke("SendMessageToAll", username + " (" + tempoMsg() + ")-- > " + message);
+    else
+        connection.invoke("SendMessageToGroup", groupValue, " (" + tempoMsg() + ")-- > " + message);
+    
     e.preventDefault();
 });
 
-$("#joinGroup").click(function (event) {
+$("#joinGroup").click(function () {
 
     var nomeGrupo = $('#nomeGrupo:text').val();
 
@@ -99,8 +90,7 @@ $("#joinGroup").click(function (event) {
     option.value = nomeGrupo;
     document.getElementById("group").add(option); //grupo de elementos
 
-    connection.invoke("JoinGroup", nomeGrupo).catch(function (err) {
-        return console.error(err.toString());
-    });
-    event.preventDefault();
+    connection.invoke("JoinGroup", nomeGrupo);
+
+    e.preventDefault();
 }); 
